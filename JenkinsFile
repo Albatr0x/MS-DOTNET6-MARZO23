@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+ 
+    stages {
+        stage('SCM') {
+            steps {
+               git branch: 'main', url: 'https://github.com/Albatr0x/MS-DOTNET6-MARZO23'
+            }
+        }
+        
+          stage('Build Net6.0') {
+            steps {
+                bat(script: 'dir' , returnStdout:true);
+                bat(script: 'dotnet restore' , returnStdout:true);
+                bat(script: 'dotnet build' , returnStdout:true);
+                bat(script: 'dotnet test' , returnStdout:true);
+            }
+        }
+        
+          stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}
